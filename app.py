@@ -41,26 +41,36 @@ def create_app(test_config=None):
 	def get_actors():
 		
 		actors = Actor.query.order_by(Actor.id).all()
-
+		actors_list = []
+	
 		if len(actors) == 0:
 			abort(404)
 
+		else:
+			for actor in actors:
+				actors_list.append(actor.format())
+
 		return jsonify({
 			'success': True,
-			'actors': actors.format() #not sure about it here !!
+			'actors': actors_list #not sure about it here !!
 		})
 
 	@app.route('/movies', methods=['GET'])
 	def get_movies():
 	
 		movies = Movie.query.order_by(Movie.id).all()
+		movies_list = []
 
 		if len(movies) == 0:
 			abort(404)
+		
+		else:
+			for movie in movies:
+				movies_list.append(movie.format())
 
 		return jsonify({
 			'success': True,
-			'movies': movies.format()
+			'movies': movies_list
 		})
 	
 	'''
@@ -95,7 +105,7 @@ def create_app(test_config=None):
 
 		try:
 
-			movie = Movie.query.filter(Movie.id == movie_id).one_or_more()
+			movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
 
 			if movie is None:
 				abort(404)
