@@ -1,1 +1,1 @@
-export DATABASE_URL = "postgresql://Bruno@localhost:5432/capstone"
+export DATABASE_URL = ""
