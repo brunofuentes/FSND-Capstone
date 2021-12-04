@@ -188,10 +188,10 @@ def create_app(test_config=None):
 		body = request.form
 		new_name = body.get('name')
 		new_age = body.get('age')
-		new_gender = body.ger('gender')
+		new_gender = body.get('gender')
 
 		try:
-			actor = Actor.query.filter(Actor.id == id).one_or_more()
+			actor = Actor.query.filter(Actor.id == id).one_or_none()
 
 			if actor is None:
 				abort(404)
@@ -200,8 +200,11 @@ def create_app(test_config=None):
 				actor.name = new_name				
 				actor.age = new_age
 				actor.gender = new_gender
+				actor.update()
 
 			return jsonify({
+				'success': True,
+				'actor': actor.format()
 				
 			})
 
@@ -217,7 +220,7 @@ def create_app(test_config=None):
 		new_release_date = body.get('release_date')
 
 		try:
-			movie = Movie.query.filter(Movie.id == id).one_or_more()
+			movie = Movie.query.filter(Movie.id == id).one_or_none()
 
 			if movie is None:
 				abort(404)
@@ -225,9 +228,11 @@ def create_app(test_config=None):
 			else:
 				movie.title = new_title
 				movie.release_date = new_release_date
+				movie.update()
 
 			return jsonify({
-
+				'success': True,
+				'movie': movie.format()
 			})
 				
 		except Exception as error:
