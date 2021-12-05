@@ -1,10 +1,14 @@
 import os
+import sys
 import unittest
 import json
 from flask_sqlalchemy import SQLAlchemy
 
-from .app import create_app
-from .models import setup_db, Actor, Movie
+# sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, '..')
+
+from app.app import create_app
+from app.models import setup_db, Actor, Movie
 
 
 class CastingAgencyTestCase(unittest.TestCase):
