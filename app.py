@@ -6,7 +6,6 @@ from flask_cors import CORS
 
 from models import setup_db, Movie, Actor
 
-
 def create_app(test_config=None):
   # create and configure the app
 	app = Flask(__name__)
@@ -32,9 +31,6 @@ def create_app(test_config=None):
 	'''
 	Endpoints:
 	- GET /actors and /movies
-	- DELETE /actors/ and /movies/
-	- POST /actors and /movies and
-	- PATCH /actors/ and /movies/
 	'''
 
 	@app.route('/actors', methods=['GET'])
@@ -125,7 +121,6 @@ def create_app(test_config=None):
 	'''
 	Endpoints:
 	- POST /actors and /movies and
-	- PATCH /actors/ and /movies/
 	'''
 
 	@app.route('/actors', methods=['POST'])
@@ -178,7 +173,6 @@ def create_app(test_config=None):
 
 	'''
 	Endpoints:
-	- POST /actors and /movies and
 	- PATCH /actors/ and /movies/
 	'''
 
@@ -238,6 +232,45 @@ def create_app(test_config=None):
 		except Exception as error:
 			print(error)
 			abort(422)
+
+	@app.errorhandler(422)
+	def unprocessable(error):
+		return jsonify({
+			"success": False,
+			"error": 422,
+			"message": "unprocessable"
+		}), 422
+
+	@app.errorhandler(400)
+	def bad_request(error):
+
+		return jsonify({
+			'success': False,
+			'error': 400,
+			'message': 'Bad Request'
+		}), 400
+
+	@app.errorhandler(500)
+	def server_error(error):
+
+		return jsonify({
+			'success': False,
+			'error': 500,
+			'message': 'Internal server error'
+		}), 500
+
+	@app.errorhandler(404)
+	def not_found(error):
+
+		return jsonify({
+			'success': False,
+			'error': 404,
+			'message': 'Not Found'
+		}), 404
+
+	# @app.errorhandler(AuthError)
+	# def AuthError(error):
+	# 	return jsonify (error.error), error.status_code
 
 	return app
 app = create_app()
