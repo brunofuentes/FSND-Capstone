@@ -2,6 +2,7 @@ import os
 import unittest
 import json
 from flask_sqlalchemy import SQLAlchemy
+
 from .app import create_app
 from .models import setup_db, Actor, Movie
 
@@ -9,12 +10,12 @@ from .models import setup_db, Actor, Movie
 class CastingAgencyTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.app = create_app(test_config=True)
+        self.app = create_app()
         self.client = self.app.test_client
 
-        self.assistent = os.getenv('ASSISTENT')
-        self.director = os.getenv('DIRECTOR')
-        self.producer = os.getenv('PRODUCER')
+        self.assistent = os.environ('ASSISTENT')
+        self.director = os.environ('DIRECTOR')
+        self.producer = os.environ('PRODUCER')
 
         self.database_path = os.environ['DATABASE_URL']
         # self.database_path = 'postgresql://Bruno@localhost:5432/capstone'
@@ -237,5 +238,5 @@ class CastingAgencyTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
