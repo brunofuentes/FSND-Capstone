@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 from sys import getwindowsversion
 from flask import Flask, request, abort, jsonify
@@ -29,6 +30,12 @@ def create_app(test_config=None):
 
 		return response
 
+	@app.route('/', methods=['GET'])
+	def home():
+		return jsonify({
+			'success': True,
+			'message': 'Healthy!'
+		})
 
 	'''
 	Endpoints:
@@ -291,3 +298,4 @@ def AuthError(error):
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=8080, debug=True)
+
