@@ -1,10 +1,12 @@
 import os
+import json
 from sys import getwindowsversion
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
-from models import setup_db, Movie, Actor
+from .models import setup_db, Movie, Actor
+from .auth.auth import AuthError, requires_auth
 
 def create_app(test_config=None):
   # create and configure the app
@@ -34,7 +36,8 @@ def create_app(test_config=None):
 	'''
 
 	@app.route('/actors', methods=['GET'])
-	def get_actors():
+	@requires_auth('get:actors')
+	def get_actors(payload):
 		
 		actors = Actor.query.order_by(Actor.id).all()
 		actors_list = []
@@ -48,11 +51,12 @@ def create_app(test_config=None):
 
 		return jsonify({
 			'success': True,
-			'actors': actors_list #not sure about it here !!
+			'actors': actors_list
 		})
 
 	@app.route('/movies', methods=['GET'])
-	def get_movies():
+	@requires_auth('get:movies')
+	def get_movies(payload):
 	
 		movies = Movie.query.order_by(Movie.id).all()
 		movies_list = []
@@ -75,7 +79,8 @@ def create_app(test_config=None):
 	'''
 
 	@app.route('/actors/<int:actor_id>', methods=['DELETE'])
-	def delete_actor(actor_id):
+	@requires_auth('delete:actors')
+	def delete_actor(payload, actor_id):
 
 		try:
 
@@ -97,7 +102,8 @@ def create_app(test_config=None):
 			abort(422)
 
 	@app.route('/movies/<int:movie_id>', methods=['DELETE'])
-	def delete_movie(movie_id):
+	@requires_auth('delete:movies')
+	def delete_movie(payload, movie_id):
 
 		try:
 
@@ -124,7 +130,8 @@ def create_app(test_config=None):
 	'''
 
 	@app.route('/actors', methods=['POST'])
-	def create_actor():
+	@requires_auth('post:actors')
+	def create_actor(payload):
 
 		body = request.form
 		new_name = body.get('name')
@@ -149,7 +156,8 @@ def create_app(test_config=None):
 			abort(422)
 
 	@app.route('/movies', methods=['POST'])
-	def create_movie():
+	@requires_auth('post:movies')
+	def create_movie(payload):
 
 		body = request.form
 		new_title = body.get('title')
@@ -177,7 +185,8 @@ def create_app(test_config=None):
 	'''
 
 	@app.route('/actors/<int:id>', methods=['PATCH'])
-	def update_actor(id):
+	@requires_auth('patch:actors')
+	def update_actor(payload, id):
 
 		body = request.form
 		new_name = body.get('name')
@@ -207,7 +216,8 @@ def create_app(test_config=None):
 			abort(422)
 
 	@app.route('/movies/<int:id>', methods=['PATCH'])
-	def update_movie(id):
+	@requires_auth('patch:movies')
+	def update_movie(payload, id):
 
 		body = request.form
 		new_title = body.get('title')
@@ -268,12 +278,16 @@ def create_app(test_config=None):
 			'message': 'Not Found'
 		}), 404
 
-	# @app.errorhandler(AuthError)
-	# def AuthError(error):
-	# 	return jsonify (error.error), error.status_code
+
+
 
 	return app
+
 app = create_app()
+
+@app.errorhandler(AuthError)
+def AuthError(error):
+	return jsonify (error.error), error.status_code
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=8080, debug=True)

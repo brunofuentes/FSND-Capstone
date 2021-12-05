@@ -6,9 +6,18 @@ from urllib.request import urlopen
 
 from werkzeug.datastructures import Authorization
 
-AUTH0_DOMAIN = ''
+AUTH0_DOMAIN = 'fsnd-learning.eu.auth0.com'
 ALGORITHMS = ['RS256']
-API_AUDIENCE = ''
+API_AUDIENCE = 'castingagency'
+
+'''
+Generate new Token: 
+https://fsnd-learning.eu.auth0.com/authorize?
+audience=castingagency&
+response_type=token&
+client_id=k45gdNHT8UN58n5grMnUnOnd4WBJZLEL&
+redirect_uri=http://127.0.0.1:5000/
+'''
 
 ##AuthError Exception
 
