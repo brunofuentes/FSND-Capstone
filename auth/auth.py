@@ -33,19 +33,29 @@ def get_token_auth_header():
     if not auth:
         raise AuthError({
             'code': 'authorization_header_missing',
-            'description': 'Authorization header is expected.'
+            'description': 'Authorization header is expected.',
+            'success': False
         }, 401)
 
     parts = auth.split()
     if parts[0].lower() != 'bearer':
         raise AuthError({
             'code': 'invalid_header',
-            'description': 'Authorization header must start with "Bearer"'
+            'description': 'Authorization header must start with "Bearer".',
+            'success': False
         }, 401)
     elif len(parts) == 1:
         raise AuthError({
             'code': 'invalid_header',
-            'description': 'Authorization header must be bearer token.'
+            'description': 'Token not found',
+            'success': False
+        }, 401)
+
+    elif len(parts) > 2:
+        raise AuthError({
+            'code': 'invalid_header',
+            'description': 'Authorization header must be bearer token.',
+            'success': False
         }, 401)
 
     token = parts[1]
@@ -55,14 +65,16 @@ def check_permissions(permission, payload):
     if 'permissions' not in payload:
         raise AuthError({
             'code': 'invalid_claims',
-            'description': 'Permissions not included in JWT'
+            'description': 'Permissions not included in JWT',
+            'success': False
         }, 400)
 
     if permission not in payload['permissions']:
         raise AuthError({
             'code': 'unauthorized',
-            'description': 'Permission not found'
-        }, 403)
+            'description': 'Permission not found',
+            'success': False
+        }, 401)
 
     return True
 
@@ -98,16 +110,22 @@ def verify_decode_jwt(token):
 
             return payload
 
+        except jwt.ExpiredSignatureError:
+            raise AuthError({
+                'code': 'token_expired',
+                'description': 'Token expired.'
+            }, 401)
+
         except jwt.JWTClaimsError:
             raise AuthError({
-                'code': 'invlaid_claims',
+                'code': 'invalid_claims',
                 'description': 'Incorrect claims. Please, check the audience and issuer.'
             }, 401)
 
         except Exception:
             raise AuthError({
                 'code': 'invalid_header',
-                'description': 'Unable to find the appropriate token.'
+                'description': 'Unable to parse authentication token.'
             }, 400)
 
     raise AuthError({
@@ -122,7 +140,7 @@ def requires_auth(permission=''):
             token = get_token_auth_header()
             try:
                 payload = verify_decode_jwt(token)
-            except:
+            except IndexError:
                 abort(401)
 
             check_permissions(permission, payload)
