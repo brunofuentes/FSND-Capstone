@@ -252,14 +252,6 @@ def create_app(test_config=None):
 			print(error)
 			abort(422)
 
-	@app.errorhandler(422)
-	def unprocessable(error):
-		return jsonify({
-			"success": False,
-			"error": 422,
-			"message": "unprocessable"
-		}), 422
-
 	@app.errorhandler(400)
 	def bad_request(error):
 
@@ -269,14 +261,23 @@ def create_app(test_config=None):
 			'message': 'Bad Request'
 		}), 400
 
-	@app.errorhandler(500)
-	def server_error(error):
+	@app.errorhandler(401)
+	def unauthorized(error):
 
 		return jsonify({
 			'success': False,
-			'error': 500,
-			'message': 'Internal server error'
-		}), 500
+			'error': 401,
+			'message': 'Unauthorized'
+		}), 401
+	
+	@app.errorhandler(403)
+	def forbidden(error):
+
+		return jsonify({
+			'success': False,
+			'error': 403,
+			'message': 'Forbidden'
+		}), 403
 
 	@app.errorhandler(404)
 	def not_found(error):
@@ -287,8 +288,22 @@ def create_app(test_config=None):
 			'message': 'Not Found'
 		}), 404
 
+	@app.errorhandler(422)
+	def unprocessable(error):
+		return jsonify({
+			"success": False,
+			"error": 422,
+			"message": "unprocessable"
+		}), 422
 
+	@app.errorhandler(500)
+	def server_error(error):
 
+		return jsonify({
+			'success': False,
+			'error': 500,
+			'message': 'Internal server error'
+		}), 500
 
 	return app
 
