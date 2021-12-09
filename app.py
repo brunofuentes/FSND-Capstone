@@ -16,8 +16,7 @@ def create_app(test_config=None):
 	app = Flask(__name__)
 	setup_db(app)
 
-	#Cors to allow '*' for origins.
-	CORS(app, resources=r'/api/*')
+	CORS(app)
 
 	#CORS Headers
 	@app.after_request
@@ -314,4 +313,4 @@ def AuthError(error):
 	return jsonify (error.error), error.status_code
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', port=8080, debug=True)
+	app.run()
