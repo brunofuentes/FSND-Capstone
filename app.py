@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-from sys import getwindowsversion
+# from sys import getwindowsversion
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
