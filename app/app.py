@@ -9,7 +9,7 @@ from flask_cors import CORS
 # sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from .models import setup_db, Movie, Actor
-from auth.auth import AuthError, requires_auth
+from .auth import AuthError, requires_auth
 
 def create_app(test_config=None):
   # create and configure the app
@@ -315,4 +315,3 @@ def AuthError(error):
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=8080, debug=True)
-

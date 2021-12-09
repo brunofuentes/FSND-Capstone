@@ -16,7 +16,27 @@ def setup_db(app, database_path = database_path):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
+    # db.create_all()
+
+    db_drop_and_create_all()
+
+def db_drop_and_create_all():
+    db.drop_all()
     db.create_all()
+
+    movie = Movie(
+        title='Pulp Fiction',
+        release_date='1994'
+    )
+    movie.insert()
+
+    actor = Actor(
+        name='Fernanda Montenegro',
+        age=68,
+        gender='Fem'
+    )
+    actor.insert()
+
 
 class Movie(db.Model):
     __tablename__ = "movie"

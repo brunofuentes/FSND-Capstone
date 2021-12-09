@@ -8,7 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 sys.path.insert(0, '..')
 
 from app.app import create_app
-from app.models import setup_db, Actor, Movie
+from app.models import setup_db, Actor, Movie, db_drop_and_create_all
 
 
 class CastingAgencyTestCase(unittest.TestCase):
@@ -31,26 +31,15 @@ class CastingAgencyTestCase(unittest.TestCase):
             self.db.init_app(self.app)
             self.db.create_all()
 
-    #creates a new actor
-
-        self.actor = {
-            'name': 'actor_testing',
-            'age': 29,
-            'gender': 'test01'
-        }
-        print('New Actor created')
-
-    #creates a new movie
-
-        self.movie = {
-            'title': 'movie_testing',
-            'release_date': '1991'
-        }
-        print('New Movie created')
+    #reset database:
+    db_drop_and_create_all()
     
     def tearDown(self):
         pass
 
+    '''
+    From a total of 17 tests is to be expected 8 Error tests
+    '''
 
 #General Test - Server status
 
@@ -60,7 +49,6 @@ class CastingAgencyTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-
 
 #GET Endpoints:
 
@@ -74,12 +62,13 @@ class CastingAgencyTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertTrue(data['actors'])
 
-    #this test should fail
+    #ERROR Test: this test should fail
     def test_401_get_actors(self):
         res = self.client().get('/actors')
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 401)
+        self.assertEqual(data['success'], False)
 
     #this test should pass
     def test_get_movies(self):
@@ -91,7 +80,7 @@ class CastingAgencyTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertTrue(data['movies'])
 
-    #following test should fail
+    #ERROR Test: following test should fail
     def test_401_get_movies(self):
         res = self.client().get('/movies',
                                 headers={})
@@ -103,41 +92,41 @@ class CastingAgencyTestCase(unittest.TestCase):
 #DELETE Endpoints:
 
     #following test should pass
-    # def test_delete_actor(self):
-    #     res = self.client().delete('/actors/5',
-    #                                 headers={'Authorization': 'Bearer ' + self.producer})
-    #     data = json.loads(res.data)
+    def test_delete_actor(self):
+        res = self.client().delete('/actors/1',
+                                    headers={'Authorization': 'Bearer ' + self.producer})
+        data = json.loads(res.data)
 
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
-    #     self.assertTrue(data['deleted'])
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(data['deleted'])
 
-    #following test should fail
-    def test_403_delete_actor(self):
+    #ERROR Test: following test should fail
+    def test_401_delete_actor(self):
         res = self.client().delete('/actors/1',
                             headers={'Authorization': 'Bearer ' + self.assistent})
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 403)
+        self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
 
     #following test should pass
-    # def test_delete_movie(self):
-    #     res = self.client().delete('movies/8',
-    #                                 headers={'Authorization': 'Bearer ' + self.producer})
-    #     data = json.loads(res.data)
+    def test_delete_movie(self):
+        res = self.client().delete('movies/1',
+                                    headers={'Authorization': 'Bearer ' + self.producer})
+        data = json.loads(res.data)
 
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
-    #     self.assertTrue(data['deleted'])
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(data['deleted'])
 
-    #following test should fail
-    def test_403_delete_movie(self):
-        res = self.client().delete('movies/8',
+    #ERROR Test: following test should fail
+    def test_401_delete_movie(self):
+        res = self.client().delete('movies/1',
                                     headers={'Authorization': 'Bearer ' + self.assistent})
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 403)
+        self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
 
 #POST Endpoints:
@@ -154,15 +143,15 @@ class CastingAgencyTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertTrue(data['created actor'])
     
-    #following test should fail
-    def test_403_create_actor(self):
+    #ERROR Test: following test should fail
+    def test_401_create_actor(self):
         res = self.client().post('/actors',
                                 headers={'Authorization': 'Bearer ' + self.assistent},
                                 json={'age': 20})
         
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 403)
+        self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
 
     #following test should pass
@@ -176,21 +165,21 @@ class CastingAgencyTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertTrue(data['created movie'])
 
-    #following test should fail, no actor-name is given
-    def test_403_create_movie(self):
+    #ERORR Test: following test should fail
+    def test_401_create_movie(self):
         res = self.client().post('/movies',
                                     headers={'Authorization': 'Bearer ' + self.assistent},
-                                    json={'release_date': 1991})
+                                    json={'release_date': '1991'})
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 403)
+        self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
 
 #PATCH Endpoints
 
     #following test should pass
     def test_update_actor(self):
-        res = self.client().patch('/actors/4',
+        res = self.client().patch('/actors/1',
                                     headers={'Authorization': 'Bearer ' + self.producer},
                                     json={'name': 'John Test'})
         data = json.loads(res.data)
@@ -199,36 +188,36 @@ class CastingAgencyTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertTrue(data['actor'])
 
-    #following test should fail
+    #ERROR TEST: following test should fail
 
-    def test_403_update_actor(self):
-        res = self.client().patch('/actors/2',
+    def test_401_update_actor(self):
+        res = self.client().patch('/actors/1',
                                     headers={'Authorization': 'Bearer ' + self.assistent},
                                     json={'name': 'John'})
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 403)
+        self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
 
     #following test should pass
     def test_update_movie(self):
-        res = self.client().patch('/movies/3',
+        res = self.client().patch('/movies/1',
                                     headers={'Authorization': 'Bearer ' + self.producer},
-                                    json={'title': 'CLICK', 'release_date': '2001'})
+                                    json={'title': 'update test'})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(data['movie'])
 
-    #following test should fail
-    def test_403_update_movie(self):
-        res = self.client().patch('/movies/4',
-                                    headers={'Authorization': 'Bearer ' + self.producer},
+    #ERROR TEST: following test should fail
+    def test_401_update_movie(self):
+        res = self.client().patch('/movies/1',
+                                    headers={'Authorization': 'Bearer ' + self.assistent},
                                     json={'release_date': '2001'})
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 403)
+        self.assertEqual(res.status_code, 401)
         self.assertEqual(data['success'], False)
 
 if __name__ == '__main__':
