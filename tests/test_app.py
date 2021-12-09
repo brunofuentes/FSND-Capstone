@@ -7,8 +7,8 @@ from flask_sqlalchemy import SQLAlchemy
 # sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 sys.path.insert(0, '..')
 
-from app.app import create_app
-from app.models import setup_db, Actor, Movie, db_drop_and_create_all
+from app import create_app
+from models import setup_db, Actor, Movie, db_drop_and_create_all
 
 
 class CastingAgencyTestCase(unittest.TestCase):
