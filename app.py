@@ -8,8 +8,8 @@ from flask_cors import CORS
 
 # sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from models import setup_db, Movie, Actor
-from auth import AuthError, requires_auth
+from .models import setup_db, Movie, Actor
+from .auth import AuthError, requires_auth
 
 def create_app(test_config=None):
   # create and configure the app
