@@ -53,23 +53,47 @@ flask run
 The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies. You are an Executive Producer within the company and are creating a system to simplify and streamline your process.
 
 ## Roles:
+
+To generate a new token:
+
+```
+https://fsnd-learning.eu.auth0.com/authorize?
+audience=castingagency&
+response_type=token&
+client_id=k45gdNHT8UN58n5grMnUnOnd4WBJZLEL&
+redirect_uri=https://fsnd-capstone-bvf.herokuapp.com/
+```
+
 - Casting Assistant
     - Can view actors and movies
+
+Login info:
+- email: assistant@FSND-Casting.com
+- password: Assistant123
 
 - Casting Director
     - All permissions a Casting Assistant has and…
     - Add or delete an actor from the database
     - Modify actors or movies
 
+Login info:
+- email: director@FSND-Casting.com
+- password: Director123
+
 - Executive Producer
     - All permissions a Casting Director has and…
     - Add or delete a movie from the database
 
+Login info:
+- email: producer@FSND-Casting.com
+- password: Producer123
+
 ## Models:
-Movies with attributes title and release date
-Actors with attributes name, age and gender
+- Movies with attributes title and release date
+- Actors with attributes name, age and gender
 
 ## Endpoints:
+
 
 ### GET '/'
 
@@ -89,8 +113,19 @@ Sample:
 - Returns a list of all actors from the database
 
 Sample:
-```
 
+```
+{
+    "actors": [
+        {
+            "age": 68,
+            "gender": "Fem",
+            "id": 1,
+            "name": "Fernanda Montenegro"
+        }
+    ],
+    "success": true
+}
 ```
 
 ### GET '/movies'
@@ -98,8 +133,18 @@ Sample:
 - Returns a list of all movies from the database. Requires access authorization (Casting assistant, Casting director or Executive Producer)
 
 Sample:
-```
 
+```
+{
+    "movies": [
+        {
+            "id": 1,
+            "release_date": "1994",
+            "title": "Pulp Fiction"
+        }
+    ],
+    "success": true
+}
 ```
 
 ### DELETE '/actors/<int:actor_id>'
@@ -108,8 +153,17 @@ Sample:
 - Returns the deleted actor information (id, name, age, gender)
 
 Sample:
-```
 
+```
+{
+    "deleted": {
+        "age": 78,
+        "gender": "Masc",
+        "id": 2,
+        "name": "Morgan Freeman"
+    },
+    "success": true
+}
 ```
 
 ### DELETE '/movies/<int:movie_id>'
@@ -118,8 +172,16 @@ Sample:
 - Returns the deleted movie information (id, title, release date)
 
 Sample:
-```
 
+```
+{
+    "deleted": {
+        "id": 2,
+        "release_date": "1997",
+        "title": "Titanic"
+    },
+    "success": true
+}
 ```
 
 ### POST '/actors'
@@ -128,8 +190,17 @@ Sample:
 - Returns the created actor information (id, name, age, gender)
 
 Sample:
-```
 
+```
+{
+    "created actor": {
+        "age": 78,
+        "gender": "Masc",
+        "id": 2,
+        "name": "Morgan Freeman"
+    },
+    "success": true
+}
 ```
 
 ### POST '/movies'
@@ -138,8 +209,16 @@ Sample:
 - Returns the created movie information (id, title, release date)
 
 Sample:
-```
 
+```
+{
+    "created movie": {
+        "id": 2,
+        "release_date": "1997",
+        "title": "Titanic"
+    },
+    "success": true
+}
 ```
 
 ### PATCH '/actors/<int:actor_id>'
@@ -148,8 +227,17 @@ Sample:
 - Returns the modified actor information (id, name, age, gender)
 
 Sample:
-```
 
+```
+{
+    "actor": {
+        "age": 69,
+        "gender": "Fem",
+        "id": 1,
+        "name": "Fernanda Montenegro"
+    },
+    "success": true
+}
 ```
 
 ### PATCH '/movies/<int:movie_id>'
@@ -158,8 +246,16 @@ Sample:
 - Returns the modified actor information (id, title, release date)
 
 Sample:
-```
 
+```
+{
+    "movie": {
+        "id": 1,
+        "release_date": "1995",
+        "title": "Pulp Fiction"
+    },
+    "success": true
+}
 ```
 
 ### Tests:
@@ -170,4 +266,6 @@ Sample:
 
 How to run the tests:
 
-``` python test_app.py ```
+```
+python test_app.py
+```
