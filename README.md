@@ -1,9 +1,9 @@
 # Capstone - Final Project
 
 Final project of Udacity full stack web developer nanodegree program.
-This project objective is to build a REST API including an authentication & authorization in [Flask](https://flask.palletsprojects.com/en/2.0.x/), role-based control design patterns using [Auth0](https://www.auth0.com), hosted and in [Heroku](http://www.heroku.com/), .
+This project objective is to build a REST API including an authentication & authorization in [Flask](https://flask.palletsprojects.com/en/2.0.x/), role-based control design patterns using [Auth0](https://www.auth0.com), hosted and in [Heroku](http://www.heroku.com/).
 
-Project URL: [https://fsnd-capstone-bvf.herokuapp.com/](https://fsnd-capstone-bvf.herokuapp.com/).
+API URL: [https://fsnd-capstone-bvf.herokuapp.com/](https://fsnd-capstone-bvf.herokuapp.com/).
 
 List of contents taught by the [Nanodegree course](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd0044) within its 5 modules/projects:
 
@@ -19,18 +19,40 @@ List of contents taught by the [Nanodegree course](https://www.udacity.com/cours
 - Testing Flask Applications
 - Deploying applications using AWS and Heroku
 
-## Key Dependencies
+## Tech Stack (Dependencies)
 
+- **virtualenv** as a tool to create isolated Python environments
 - [Python 3.6](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
 - [Flask](https://flask.palletsprojects.com/en/2.0.x/)
 - [SQLAlchemy](https://www.sqlalchemy.org/) and [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
 - [Python-jose](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
 
+## Running the App localy
+
+1. Clone this Repository
+2. Initialize and activate a virtualenv: 
+```
+pip install virtualenv
+python -m virtualenv env
+```
+
+3. Install all dependencies: 
+```
+pip install requirements.txt
+``` 
+
+5. Start server by running:
+```
+export FLASK_APP=app.py
+export FLASK_ENV=development
+flask run
+```
+
 ## API Reference - Casting Agency Specifications
 
 The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies. You are an Executive Producer within the company and are creating a system to simplify and streamline your process.
 
-### Roles:
+## Roles:
 - Casting Assistant
     - Can view actors and movies
 
@@ -43,17 +65,109 @@ The Casting Agency models a company that is responsible for creating movies and 
     - All permissions a Casting Director has and…
     - Add or delete a movie from the database
 
-### Models
+## Models:
 Movies with attributes title and release date
 Actors with attributes name, age and gender
 
-### Endpoints
-- GET /actors and /movies
-- DELETE /actors/ and /movies/
-- POST /actors and /movies and
-- PATCH /actors/ and /movies/
+## Endpoints:
 
-### Tests
+### GET '/'
+
+- Returns a simple message to confirm server is running.
+
+Sample:
+
+```
+{
+"message": "Healthy!",
+"success": true
+}
+```
+
+### GET '/actors'
+
+- Returns a list of all actors from the database
+
+Sample:
+```
+
+```
+
+### GET '/movies'
+
+- Returns a list of all movies from the database. Requires access authorization (Casting assistant, Casting director or Executive Producer)
+
+Sample:
+```
+
+```
+
+### DELETE '/actors/<int:actor_id>'
+
+- Deletes a specific actor from the database. Requires specific access (Casting director or Executive Producer)
+- Returns the deleted actor information (id, name, age, gender)
+
+Sample:
+```
+
+```
+
+### DELETE '/movies/<int:movie_id>'
+
+- Deletes a specific movie from the database. Requires specific access (Executive Producer only)
+- Returns the deleted movie information (id, title, release date)
+
+Sample:
+```
+
+```
+
+### POST '/actors'
+
+- Create a new actor. Requires specific access (Casting director or Executive Producer)
+- Returns the created actor information (id, name, age, gender)
+
+Sample:
+```
+
+```
+
+### POST '/movies'
+
+- Creates a new movie. Requires specific access (Executive Producer only)
+- Returns the created movie information (id, title, release date)
+
+Sample:
+```
+
+```
+
+### PATCH '/actors/<int:actor_id>'
+
+- Updates the values from a specific actor register. Requires specific access (Casting director or Executive Producer)
+- Returns the modified actor information (id, name, age, gender)
+
+Sample:
+```
+
+```
+
+### PATCH '/movies/<int:movie_id>'
+
+- Updates the values from a specific movie register. Requires specific access (Casting director or Executive Producer)
+- Returns the modified actor information (id, title, release date)
+
+Sample:
+```
+
+```
+
+### Tests:
+
 - One test for success behavior of each endpoint
 - One test for error behavior of each endpoint
 - At least two tests of RBAC for each role
+
+How to run the tests:
+
+``` python test_app.py ```
