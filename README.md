@@ -53,27 +53,32 @@ flask run
 1. Deploy the App locally
 2. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
 3. Create Heroku app
+
 ```
 heroku create name_of_your_application
 ```
 
 4. Add git remote for Heroku to local repository
+
 ```
 git remote add heroku heroku_git_url
 ```
 
 5. Add Postgresql add on for our database
+
 ```
 heroku addons:create heroku-postgresql:hobby-dev --app name_of_your_application
 heroku config --app name_of_your_application
 ```
 
 6. Push application to Heroku
+
 ```
 git push heroku master
 ```
 
 7. Run migrations
+
 ```
 heroku run python manage.py db upgrade --app name_of_your_application
 ```
