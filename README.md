@@ -60,7 +60,7 @@ The authentication is made using [Auth0](https://www.auth0.com). Three different
     - Can view actors and movies
 
 Login info:
-email: assistant@FSND-Casting.com
+email: assistant@FSND-Casting.com \
 password: Assistant123
 
 2. Casting Director
@@ -69,7 +69,7 @@ password: Assistant123
     - Modify actors or movies
 
 Login info:
-email: director@FSND-Casting.com
+email: director@FSND-Casting.com \
 password: Director123
 
 3. Executive Producer
@@ -77,7 +77,7 @@ password: Director123
     - Add or delete a movie from the database
 
 Login info:
-email: producer@FSND-Casting.com
+email: producer@FSND-Casting.com \
 password: Producer123
 
 To generate a new token for testing purposes (in case its already expired):
