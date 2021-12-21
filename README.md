@@ -27,7 +27,7 @@ List of contents taught by the [Nanodegree course](https://www.udacity.com/cours
 - [SQLAlchemy](https://www.sqlalchemy.org/) and [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
 - [Python-jose](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
 
-## Running the App localy
+## Running the App locally
 
 1. Clone this Repository
 2. Initialize and activate a virtualenv: 
@@ -47,6 +47,37 @@ export FLASK_APP=app.py
 export FLASK_ENV=development
 flask run
 ```
+
+## Running the App in Heroku
+
+1. Deploy the App locally
+2. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+3. Create Heroku app
+```
+heroku create name_of_your_application
+```
+
+4. Add git remote for Heroku to local repository
+```
+git remote add heroku heroku_git_url
+```
+
+5. Add Postgresql add on for our database
+```
+heroku addons:create heroku-postgresql:hobby-dev --app name_of_your_application
+heroku config --app name_of_your_application
+```
+
+6. Push application to Heroku
+```
+git push heroku master
+```
+
+7. Run migrations
+```
+heroku run python manage.py db upgrade --app name_of_your_application
+```
+
 
 ## API Reference - Casting Agency Specifications
 
