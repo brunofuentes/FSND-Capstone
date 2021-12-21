@@ -54,7 +54,33 @@ The Casting Agency models a company that is responsible for creating movies and 
 
 ## Roles:
 
-To generate a new token:
+The authentication is made using [Auth0](https://www.auth0.com). Three different Roles are provided:
+
+1. Casting Assistant
+    - Can view actors and movies
+
+Login info:
+email: assistant@FSND-Casting.com
+password: Assistant123
+
+2. Casting Director
+    - All permissions a Casting Assistant has and…
+    - Add or delete an actor from the database
+    - Modify actors or movies
+
+Login info:
+email: director@FSND-Casting.com
+password: Director123
+
+3. Executive Producer
+    - All permissions a Casting Director has and…
+    - Add or delete a movie from the database
+
+Login info:
+email: producer@FSND-Casting.com
+password: Producer123
+
+To generate a new token for testing purposes (in case its already expired):
 
 ```
 https://fsnd-learning.eu.auth0.com/authorize?
@@ -63,30 +89,6 @@ response_type=token&
 client_id=k45gdNHT8UN58n5grMnUnOnd4WBJZLEL&
 redirect_uri=https://fsnd-capstone-bvf.herokuapp.com/
 ```
-
-- Casting Assistant
-    - Can view actors and movies
-
-Login info:
-- email: assistant@FSND-Casting.com
-- password: Assistant123
-
-- Casting Director
-    - All permissions a Casting Assistant has and…
-    - Add or delete an actor from the database
-    - Modify actors or movies
-
-Login info:
-- email: director@FSND-Casting.com
-- password: Director123
-
-- Executive Producer
-    - All permissions a Casting Director has and…
-    - Add or delete a movie from the database
-
-Login info:
-- email: producer@FSND-Casting.com
-- password: Producer123
 
 ## Models:
 - Movies with attributes title and release date
@@ -258,7 +260,7 @@ Sample:
 }
 ```
 
-### Tests:
+## Tests:
 
 - One test for success behavior of each endpoint
 - One test for error behavior of each endpoint
