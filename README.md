@@ -1,42 +1,36 @@
-# FSND-Capstone
-Final project of Udacity full stack web developer nanodegree program
+# Capstone - Final Project
 
-## General Specifications
+Final project of Udacity full stack web developer nanodegree program.
+This project objective is to build a REST API including an authentication & authorization in [Flask](https://flask.palletsprojects.com/en/2.0.x/), role-based control design patterns using [Auth0](https://www.auth0.com), hosted and in [Heroku](http://www.heroku.com/), .
 
-Models will include at least…
-- Two classes with primary keys at at least two attributes each
-- [Optional but encouraged] One-to-many or many-to-many relationships between classes
+Project URL: [https://fsnd-capstone-bvf.herokuapp.com/](https://fsnd-capstone-bvf.herokuapp.com/).
 
-Endpoints will include at least…
-- Two GET requests
-- One POST request
-- One PATCH request
-- One DELETE request
+List of contents taught by the [Nanodegree course](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd0044) within its 5 modules/projects:
 
-Roles will include at least…
-- Two roles with different permissions
-- Permissions specified for all endpoints
+- Python 3
+- Relational Database Architecture
+- Modeling Data Objects with SQLAlchemy
+- Internet protocols and communication
+- Developing a Flask API
+- Authentication and Access
+- Authentication with Auth0
+- Authentication in Flask
+- Role-Based Access Control (RBAC)
+- Testing Flask Applications
+- Deploying applications using AWS and Heroku
 
-Tests will include at least….
-- One test for success behavior of each endpoint
-- One test for error behavior of each endpoint
-- At least two tests of RBAC for each role
+## Key Dependencies
 
-## Casting Agency Specifications
+- [Python 3.6](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
+- [Flask](https://flask.palletsprojects.com/en/2.0.x/)
+- [SQLAlchemy](https://www.sqlalchemy.org/) and [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
+- [Python-jose](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
+
+## API Reference - Casting Agency Specifications
 
 The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies. You are an Executive Producer within the company and are creating a system to simplify and streamline your process.
 
-Models:
-Movies with attributes title and release date
-Actors with attributes name, age and gender
-
-Endpoints:
-- GET /actors and /movies
-- DELETE /actors/ and /movies/
-- POST /actors and /movies and
-- PATCH /actors/ and /movies/
-
-Roles:
+### Roles:
 - Casting Assistant
     - Can view actors and movies
 
@@ -49,7 +43,17 @@ Roles:
     - All permissions a Casting Director has and…
     - Add or delete a movie from the database
 
-Tests:
+### Models
+Movies with attributes title and release date
+Actors with attributes name, age and gender
+
+### Endpoints
+- GET /actors and /movies
+- DELETE /actors/ and /movies/
+- POST /actors and /movies and
+- PATCH /actors/ and /movies/
+
+### Tests
 - One test for success behavior of each endpoint
 - One test for error behavior of each endpoint
 - At least two tests of RBAC for each role
