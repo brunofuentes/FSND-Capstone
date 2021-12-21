@@ -1,0 +1,292 @@
+{
+	"info": {
+		"_postman_id": "504fc705-0cda-4212-9329-21b2b321e18b",
+		"name": "Auth Assistant Heroku",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/actors",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/actors",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/movies",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/actors",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Bruno",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "30",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "Masc",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/actors",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/movies",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Pulp Fiction",
+							"type": "text"
+						},
+						{
+							"key": "release_date",
+							"value": "1994",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/movies",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/actors/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "actor_id",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/actors/1",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"actors",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/movies/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/movies/1",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"movies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/actors/1",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Bruno",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "30",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "Masculino",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/actors/3",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"actors",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/movies/1",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Titanica",
+							"type": "text"
+						},
+						{
+							"key": "release_date",
+							"value": "1992",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/movies/1",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"movies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InhYeEN1bURabmp0QjJzTnhxZUUxeCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtbGVhcm5pbmcuZXUuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxYzIzZjUwZDYwYmY0MDA2YjUzNjliYSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE2NDAxMjAzMzksImV4cCI6MTY0MDEyNzUzOSwiYXpwIjoiazQ1Z2ROSFQ4VU41OG41Z3JNblVuT25kNFdCSlpMRUwiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIl19.gPTtQGxqFXKMyvc-OyXz_n2pR1ES4kwboOAvlDw_xWUXTVtEgUZrgO4_0wAoFFWklqE9vV-567CkIGowbj02C4T8lEJHBNT3uhubTXk-RG5LHv7vCLbW2ZwPUGAzo-HqKvD0P9gay-1YN0ppiESltJ_ZNUxuFg-vm8dTx0VzrESwAYLC9cLCZ727tR4Id9NjvvnqyPWdP-fErfwC82V3FoGUZPnWKmALbFmXblx8en-c4nuICp_4bKrNCDVWzmYzFjlzW5MFFChD5EU-WMd8S-g_kEihfZ4wWXGJULfA4vFpXA26UXTgJ9aKH_3V7Q4NjQA_ygF0Vb8PAMZk_7cIBA",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

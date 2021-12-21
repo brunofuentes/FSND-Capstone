@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "8ead1daf-f733-492f-9c55-e07336c60bd5",
+		"name": "Auth Director Heroku",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/actors",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/actors",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/movies",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/actors",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Morgan Freeman",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "78",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "Masc",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/actors",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/movies",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Titanic",
+							"type": "text"
+						},
+						{
+							"key": "release_date",
+							"value": "1997",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/movies",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/actors/2",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/actors/2",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"actors",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/movies/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/movies/1",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"movies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/actors/1",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Fernanda Montenegro",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "69",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "Fem",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/actors/1",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"actors",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/movies/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InhYeEN1bURabmp0QjJzTnhxZUUxeCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtbGVhcm5pbmcuZXUuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxYWNiMGNiMGNkOGQxMDA2OTJkMzU3YSIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE2Mzg3MDc2NjgsImV4cCI6MTYzODcxNDg2OCwiYXpwIjoiazQ1Z2ROSFQ4VU41OG41Z3JNblVuT25kNFdCSlpMRUwiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIl19.KwVOwDjtjob7qYotcvyai4SJ3mVwDXuEWOfNa9bNpfhtLFB6v7eWFA9vHGT3BNB0f16cvHpf4s6MwV25lsTmjn6IrEMRxiFv9Qkw12nE-sSasP1Mqpu-Pws97RQ_yRaTJwTc744mENe39pNZZUk4YxmIUiraq21R62CmqhfnQSqpMgTZGTrLjovr96M7fP0rjRYMF2c7YfUSMT91Ce-xwacH9-Gi6Mr58KvtBccaLxQqFlkt41McSdr4FN_ckuTuhQn0stRiY_KLkL_RP_mm9bIrenWmrjvHraMWup1NdY_RbU1NpciGslzuaobzF-rWNkPa6RIaUYmjAVTclh_p5A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Titanica3",
+							"type": "text"
+						},
+						{
+							"key": "release_date",
+							"value": "1992",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://fsnd-capstone-bvf.herokuapp.com/movies/1",
+					"protocol": "https",
+					"host": [
+						"fsnd-capstone-bvf",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"movies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InhYeEN1bURabmp0QjJzTnhxZUUxeCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtbGVhcm5pbmcuZXUuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxYzI0MWQyZmNiZmU1MDA3MTZlZjEwMiIsImF1ZCI6ImNhc3RpbmdhZ2VuY3kiLCJpYXQiOjE2NDAxMjA5OTcsImV4cCI6MTY0MDEyODE5NywiYXpwIjoiazQ1Z2ROSFQ4VU41OG41Z3JNblVuT25kNFdCSlpMRUwiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIl19.PSh9YyZqkAf7JgkZDP9kG_UJY0MOE5VC2FXoY0LzFRaFTUxamuOzpDqch6T2jc-tqxqKBTVFnXqwlcVw_a1os_UKg-VuuhxYHOMHdY4AgFh97Mmp3EvMXz88kZqgkgfED3zWiPCqYqs9pID24RJdqJT5OkCJxRbbiM-260mZdyuymQPSyQt0pacNAyvk722XrTR41jyMJBPcy659mXV4g4Nh91ldSL8RCYTYzmBT2ETPF95mwW6nP-UEW0G2ciD70FirBMi3PCnTCJc4KjEgT7pSIAH02o6YQ7odobqR19R1ya7f9HtcqEOCe1pQRHvjWcxAMtMHOgO8_3M2y2j0Kg",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
