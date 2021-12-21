@@ -11,12 +11,17 @@ ALGORITHMS = ['RS256']
 API_AUDIENCE = 'castingagency'
 
 '''
-Generate new Token: 
+Generate new Token:
+
+when running server localy:
+
 https://fsnd-learning.eu.auth0.com/authorize?
 audience=castingagency&
 response_type=token&
 client_id=k45gdNHT8UN58n5grMnUnOnd4WBJZLEL&
 redirect_uri=http://127.0.0.1:5000/
+
+when running in Heroku:
 
 https://fsnd-learning.eu.auth0.com/authorize?
 audience=castingagency&
@@ -24,10 +29,7 @@ response_type=token&
 client_id=k45gdNHT8UN58n5grMnUnOnd4WBJZLEL&
 redirect_uri=https://fsnd-capstone-bvf.herokuapp.com/
 
-
 '''
-
-
 
 ##AuthError Exception
 
