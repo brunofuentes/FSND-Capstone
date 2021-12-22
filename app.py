@@ -2,7 +2,12 @@ import os
 import sys
 import json
 # from sys import getwindowsversion
-from flask import Flask, request, abort, jsonify
+from flask import (
+    Flask, 
+    request, 
+    abort, 
+    jsonify
+)
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
@@ -104,7 +109,7 @@ def create_app(test_config=None):
 			}), 200
 
 		except Exception as error:
-			print(error)
+			print(sys.exc_info)
 			abort(422)
 
 	@app.route('/movies/<int:movie_id>', methods=['DELETE'])
@@ -127,7 +132,7 @@ def create_app(test_config=None):
 			}), 200
 
 		except Exception as error:
-			print(error)
+			print(sys.exc_info)
 			abort(422)
 
 	'''
@@ -158,7 +163,7 @@ def create_app(test_config=None):
 			})
 
 		except Exception as error:
-			print(error)
+			print(sys.exc_info)
 			abort(422)
 
 	@app.route('/movies', methods=['POST'])
@@ -182,7 +187,7 @@ def create_app(test_config=None):
 			})
 
 		except Exception as error:
-			print(error)
+			print(sys.exc_info)
 			abort(422)
 
 	'''
@@ -218,7 +223,7 @@ def create_app(test_config=None):
 			})
 
 		except Exception as error:
-			print(error)
+			print(sys.exc_info)
 			abort(422)
 
 	@app.route('/movies/<int:id>', methods=['PATCH'])
@@ -246,7 +251,7 @@ def create_app(test_config=None):
 			})
 
 		except Exception as error:
-			print(error)
+			print(sys.exc_info)
 			abort(422)
 
 	@app.errorhandler(400)

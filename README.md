@@ -32,19 +32,27 @@ List of contents taught by the [Nanodegree course](https://www.udacity.com/cours
 1. Clone this Repository
 2. Initialize and activate a virtualenv: 
 ```
-pip install virtualenv
+pip3 install virtualenv
 python -m virtualenv env
 ```
 
 3. Install all dependencies: 
 ```
-pip install requirements.txt
+pip3 install requirements.txt
 ``` 
 
 5. Start server by running:
+
+On Linux:
 ```
 export FLASK_APP=app.py
 export FLASK_ENV=development
+flask run
+```
+On Windows:
+```
+set FLASK_APP=app.py
+set FLASK_ENV=development
 flask run
 ```
 
