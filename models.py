@@ -4,13 +4,19 @@ import json
 import os
 
 database_path = os.environ['DATABASE_URL']
-# local datapath: export DATABASE_URL='postgresql://Bruno@localhost:5432/capstone'
+
+'''
+local datapath:
+export DATABASE_URL='postgresql://Bruno@localhost:5432/capstone'
+'''
 
 db = SQLAlchemy()
 
-def setup_db(app, database_path = database_path):
+
+def setup_db(app, database_path=database_path):
     if database_path.startswith("postgres://"):
-        database_path = database_path.replace("postgres://", "postgresql://", 1)
+        database_path = database_path.replace(
+            "postgres://", "postgresql://", 1)
 
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -19,6 +25,7 @@ def setup_db(app, database_path = database_path):
     # db.create_all()
 
     # db_drop_and_create_all()
+
 
 def db_drop_and_create_all():
     db.drop_all()
@@ -67,6 +74,7 @@ class Movie(db.Model):
             'release_date': self.release_date
         }
 
+
 class Actor(db.Model):
     __tablename__ = "actor"
 
@@ -98,6 +106,3 @@ class Actor(db.Model):
             'age': self.age,
             'gender': self.gender
         }
-
-
-

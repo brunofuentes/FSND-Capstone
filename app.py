@@ -6,28 +6,26 @@ from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
-# sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from models import setup_db, Movie, Actor
 from auth import AuthError, requires_auth
 
+
 def create_app(test_config=None):
-  # create and configure the app
+
+    # create and configure the app
 	app = Flask(__name__)
 	setup_db(app)
 
 	CORS(app)
 
-	#CORS Headers
+	# CORS Headers
 	@app.after_request
 	def after_request(response):
-		response.headers.add(
-		"Access-Control-Allow-Headers",
-		"Content-Type, Authorization, true")
+		response.headers.add("Access-Control-Allow-Headers",
+                             "Content-Type, Authorization, true")
 
-		response.headers.add(
-		"Access-Control-Allow-Methods",
-		"GET,PUT,POST,DELETE,OPTIONS")
+		response.headers.add("Access-Control-Allow-Methods",
+                             "GET,PUT,POST,DELETE,OPTIONS")
 
 		return response
 
@@ -46,10 +44,10 @@ def create_app(test_config=None):
 	@app.route('/actors', methods=['GET'])
 	@requires_auth('get:actors')
 	def get_actors(payload):
-		
+
 		actors = Actor.query.order_by(Actor.id).all()
 		actors_list = []
-	
+
 		if len(actors) == 0:
 			abort(404)
 
@@ -65,13 +63,13 @@ def create_app(test_config=None):
 	@app.route('/movies', methods=['GET'])
 	@requires_auth('get:movies')
 	def get_movies(payload):
-	
+
 		movies = Movie.query.order_by(Movie.id).all()
 		movies_list = []
 
 		if len(movies) == 0:
 			abort(404)
-		
+
 		else:
 			for movie in movies:
 				movies_list.append(movie.format())
@@ -80,7 +78,7 @@ def create_app(test_config=None):
 			'success': True,
 			'movies': movies_list
 		})
-	
+
 	'''
 	Endpoints:
 	- DELETE /actors/ and /movies/
@@ -148,9 +146,9 @@ def create_app(test_config=None):
 
 		try:
 			actor = Actor(
-				name = new_name,
-				age = new_age,
-				gender = new_gender
+				name=new_name,
+				age=new_age,
+				gender=new_gender
 			)
 			actor.insert()
 
@@ -173,8 +171,8 @@ def create_app(test_config=None):
 
 		try:
 			movie = Movie(
-				title = new_title,
-				release_date = new_release_date
+				title=new_title,
+				release_date=new_release_date
 			)
 			movie.insert()
 
@@ -208,7 +206,7 @@ def create_app(test_config=None):
 				abort(404)
 
 			else:
-				actor.name = new_name				
+				actor.name = new_name
 				actor.age = new_age
 				actor.gender = new_gender
 				actor.update()
@@ -216,7 +214,7 @@ def create_app(test_config=None):
 			return jsonify({
 				'success': True,
 				'actor': actor.format()
-				
+
 			})
 
 		except Exception as error:
@@ -246,7 +244,7 @@ def create_app(test_config=None):
 				'success': True,
 				'movie': movie.format()
 			})
-				
+
 		except Exception as error:
 			print(error)
 			abort(422)
@@ -268,7 +266,7 @@ def create_app(test_config=None):
 			'error': 401,
 			'message': 'Unauthorized'
 		}), 401
-	
+
 	@app.errorhandler(403)
 	def forbidden(error):
 
@@ -306,11 +304,14 @@ def create_app(test_config=None):
 
 	return app
 
+
 app = create_app()
+
 
 @app.errorhandler(AuthError)
 def AuthError(error):
-	return jsonify (error.error), error.status_code
+	return jsonify(error.error), error.status_code
+
 
 if __name__ == '__main__':
 	app.run()
